@@ -53,3 +53,4 @@ $discussions=[$discussion,$discussion,$discussion,$discussion];
 Route::get('/pictures/{id}',function(){
     return new Response('{"error" : "file not found"}',404);
 });
+Route::middleware('api')->apiResource('discussion','App\Http\Controllers\DiscussionController');
