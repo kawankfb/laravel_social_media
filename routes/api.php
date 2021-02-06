@@ -54,3 +54,11 @@ Route::get('/pictures/{id}',function(){
     return new Response('{"error" : "file not found"}',404);
 });
 Route::middleware('api')->apiResource('discussion','App\Http\Controllers\DiscussionController');
+
+Route::middleware('api')->apiResource('followed_discussions','App\Http\Controllers\FollowedDiscussionController');
+Route::middleware('api')->delete('followed_discussions','App\Http\Controllers\FollowedDiscussionController@destroy');
+
+Route::middleware('api')->apiResource('files','App\Http\Controllers\FilesController');
+Route::get('profile_picture/{id}','App\Http\Controllers\FilesController@profile_picture');
+Route::middleware('api')->delete('files','App\Http\Controllers\FilesController@destroy');
+
