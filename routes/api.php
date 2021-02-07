@@ -62,3 +62,8 @@ Route::middleware('api')->apiResource('files','App\Http\Controllers\FilesControl
 Route::get('profile_picture/{id}','App\Http\Controllers\FilesController@profile_picture');
 Route::middleware('api')->delete('files','App\Http\Controllers\FilesController@destroy');
 
+
+Route::middleware('api')->apiResource('posts','App\Http\Controllers\PostController');
+Route::middleware('api')->delete('posts','App\Http\Controllers\PostController@destroy');
+Route::middleware('api')->put('posts','App\Http\Controllers\PostController@update');
+
