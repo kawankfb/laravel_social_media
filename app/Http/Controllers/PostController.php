@@ -83,6 +83,7 @@ else {
     public function show($discussion_id)
     {
         //
+        /*
         if(request()->headers!=null)
         {$headers= request()->headers;
         $date=$headers->get('If-Modified-Since');
@@ -95,8 +96,10 @@ else {
                 return new Response(null,304);
             }
             }
-
-        return new Response(Post::all()->where('discussion_id',$discussion_id),200,$headers=["Content-Type"=>"application/json"]);
+*/
+            $result = DB::table('posts')->where('discussion_id',$discussion_id)->get();
+            //$result = $result->toArray();
+        return new Response($result ,200,$headers=["Content-Type"=>"application/json"]);
         //
 
     }

@@ -27,15 +27,15 @@ class FilesController extends Controller
         $user= User::find(auth()->user()->id);
 
         $request->validate([
-            'file'=>'file|required|max:20480',
-            'isUserProfile'=>'string|required|max:5|min:4'
+            'file'=>'file|required|max:100000',
+            'setUserProfile'=>'string|required|max:5|min:4',
+            'setDiscussionProfile'=>'string|required|max:5|min:4'
         ]);
-            if($request->isUserProfile==true)
+            if($request->setUserProfile=="true")
             $isProfilePic=true;
-            else if($request->isUserProfile==false)
+            else if($request->setUserProfile=="false")
             $isProfilePic=false;
             else return new Response('{"error" : "please provide a valid isUserProfile argument"}',400,$http_response_header=['Content-Type'=>'application/json']);
-
         $user_id=$user->id;
         $pathToStoreFile='/files/'.$user_id;
         

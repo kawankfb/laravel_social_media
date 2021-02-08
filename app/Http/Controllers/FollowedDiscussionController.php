@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FollowedDiscussion;
+use App\Models\PostsFollowedDiscussion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -25,12 +26,14 @@ class FollowedDiscussionController extends Controller
         $update_time=DB::table('discussions')->latest()->get('updated_at')->first();
         $last_update_time=$update_time->updated_at;
              if(strtotime($date)<strtotime($last_update_time))
-             return new Response(FollowedDiscussion::all()->where('user_id',auth()->user()->id),200,$headers=["Content-Type"=>"application/json"]);
+             return new Response(PostsFollowedDiscussion::all()->where('user_id',auth()->user()->id),200,$headers=["Content-Type"=>"application/json"]);
             else
             {
                 return new Response(null,304);
             }
             }
+            return new Response(PostsFollowedDiscussion::all()->where('user_id',auth()->user()->id),200,$headers=["Content-Type"=>"application/json"]);
+
         //
         //
     }
@@ -121,5 +124,7 @@ class FollowedDiscussionController extends Controller
         return new Response('{"error" : "please provide a correct bearer token"}',401,$http_response_header=["Content-Type"=>"application/json"]);
        $user_id=auth()->user()->id;
         FollowedDiscussion::where('user_id',$user_id)->where('discussion_id',$discussion_id)->delete();
+        return new Response('{"message" : "discussion successfully removed from your followed discussions"}',200,$http_response_header=["Content-Type"=>"application/json"]);
+
     }
 }

@@ -33,23 +33,6 @@ Route::group([
 
 });
 Route::post('auth/register','App\Http\Controllers\AuthController@register');
-Route::post('/test',function(){
-    return "yo!";
-});
-Route::middleware('auth:api')->get('/auth/test',function(){
-    $discussion =["title"=>"kawan's group",
-    "url"=>"http://"."192.168.43.17".":8080/api/pictures/kawan.jpg"
-];
-$discussions=[$discussion,$discussion,$discussion,$discussion];
-    return new Response($discussions,200,$headers=["Content-Type" =>"application/json"]);
-});
-Route::get('/test',function(){
-    $discussion =["title"=>"kawan's group",
-    "url"=>"http://"."192.168.43.17".":8080/api/pictures/kawan.jpg"
-];
-$discussions=[$discussion,$discussion,$discussion,$discussion];
-    return new Response($discussions,200,$headers=["Content-Type" =>"application/json"]);
-});
 Route::get('/pictures/{id}',function(){
     return new Response('{"error" : "file not found"}',404);
 });
