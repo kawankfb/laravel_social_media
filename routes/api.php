@@ -49,4 +49,5 @@ Route::middleware('api')->delete('files','App\Http\Controllers\FilesController@d
 Route::middleware('api')->apiResource('posts','App\Http\Controllers\PostController');
 Route::middleware('api')->delete('posts','App\Http\Controllers\PostController@destroy');
 Route::middleware('api')->put('posts','App\Http\Controllers\PostController@update');
+Route::middleware('api')->get('personal_discussions','App\Http\Controllers\DiscussionController@showPersonalDiscussions');
 

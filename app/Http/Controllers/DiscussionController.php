@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Discussion;
+use App\Models\PersonalDiscussion;
 use Facade\FlareClient\Time\Time;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -77,9 +78,13 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showPersonalDiscussions()
     {
         //
+        if(auth()->user()==null)
+        return new Response('{"error" : "please provide a correct bearer token"}',401,$http_response_header=["Content-Type"=>"application/json"]); 
+        return new Response(PersonalDiscussion::all()->where('user_id',auth()->user()->id),200,$headers=["Content-Type"=>"application/json"]);
+
     }
 
     /**
