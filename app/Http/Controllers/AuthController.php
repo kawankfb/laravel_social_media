@@ -65,6 +65,13 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
+    public function getMe()
+    {
+        if(auth()->user()==null)
+        return response()->json(["error"=>"you are not authorizedtp access this information"]);
+        return response()->json(auth()->user());
+    }
+
     /**
      * Log the user out (Invalidate the token).
      *

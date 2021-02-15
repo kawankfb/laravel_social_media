@@ -14,6 +14,7 @@ class CreatePostsJoinedFollowedDiscussionsView extends Migration
      */
     public function up()
     {
+        DB::statement($this->dropView());
         DB::statement($this->createView());
     }
    

@@ -97,7 +97,7 @@ else {
             }
             }
 */
-            $result = DB::table('posts')->where('discussion_id',$discussion_id)->get();
+            $result = DB::table('posts')->where('discussion_id',$discussion_id)->orderBy('created_at','asc')->get();
             //$result = $result->toArray();
         return new Response($result ,200,$headers=["Content-Type"=>"application/json"]);
         //

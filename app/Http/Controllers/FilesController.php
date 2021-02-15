@@ -94,6 +94,7 @@ class FilesController extends Controller
  
     }
 
+    
     public function profile_picture($id)
     {
         $path='files/'.$id.'/profile.jpg';
@@ -107,7 +108,7 @@ class FilesController extends Controller
     //get mime type of image
     $mime = Storage::mimeType($path);
     //prepare response with image content and response code
-    return new Response($content, 200,$http_response_header=['Content-Type'=>$mime]);
+    return new Response($content, 200,$http_response_header=['Content-Type'=>$mime,'Cache-Control'=>"public, max-age=180"]);
  } else {
     abort(404);
  }

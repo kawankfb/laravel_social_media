@@ -17,6 +17,7 @@ class CreateDiscussionsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('url');
+            $table->string('description')->nullable();
             $table->integer('user_id');
             $table->timestamps();
             $table->foreign('user_id')

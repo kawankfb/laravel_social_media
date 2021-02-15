@@ -31,7 +31,9 @@ Route::group([
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::post('me', 'App\Http\Controllers\AuthController@me');
 
+
 });
+Route::middleware('api')->get('me', 'App\Http\Controllers\AuthController@getMe');
 Route::post('auth/register','App\Http\Controllers\AuthController@register');
 Route::get('/pictures/{id}',function(){
     return new Response('{"error" : "file not found"}',404);
@@ -51,3 +53,7 @@ Route::middleware('api')->delete('posts','App\Http\Controllers\PostController@de
 Route::middleware('api')->put('posts','App\Http\Controllers\PostController@update');
 Route::middleware('api')->get('personal_discussions','App\Http\Controllers\DiscussionController@showPersonalDiscussions');
 
+
+Route::middleware('api')->apiResource('category','App\Http\Controllers\CategoryController');
+Route::middleware('api')->delete('category','App\Http\Controllers\CategoryController@destroy');
+Route::middleware('api')->post('report','App\Http\Controllers\ReportController@store');

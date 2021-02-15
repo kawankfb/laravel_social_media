@@ -49,9 +49,12 @@ class FollowedDiscussionController extends Controller
         return new Response('{"error" : "please provide a correct bearer token"}',401,$http_response_header=["Content-Type"=>"application/json"]);
         if($request->discussion_id==null)
         return new Response('{"error" : "please provide a discussion id"}',401,$http_response_header=["Content-Type"=>"application/json"]);
+        $exists=FollowedDiscussion::all()->where('user_id',auth()->user()->id)->where('discussion_id',$request->discussion_id)->first();
+        if($exists!=null)
+        return new Response('{"error":"discussion is already added to your followed discussions"}',409,$http_response_header=["Content-Type"=>"application/json"]);
         $followedDiscussion=new FollowedDiscussion(['user_id'=>auth()->user()->id , 'discussion_id'=> $request->discussion_id]);
         $followedDiscussion->save();
-        return new Response($followedDiscussion,201,$http_response_header=["Content-Type"=>"application/json"]);
+        return new Response('{"message":"discussion was successfully added to your followed discussions"}',201,$http_response_header=["Content-Type"=>"application/json"]);
     }
 
     /**
