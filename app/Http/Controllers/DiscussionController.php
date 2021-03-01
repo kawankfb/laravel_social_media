@@ -21,6 +21,7 @@ class DiscussionController extends Controller
      */
     public function index()
     {
+        
         if(request()->headers!=null)
         {$headers= request()->headers;
         $date=$headers->get('If-Modified-Since');
@@ -89,6 +90,10 @@ class DiscussionController extends Controller
         return new Response($result ,200,$headers=["Content-Type"=>"application/json"]);
         return new Response(PersonalDiscussion::all()->where('user_id',auth()->user()->id),200,$headers=["Content-Type"=>"application/json"]);
 
+    }
+
+    public function show($id){
+        return Discussion::all()->where('id',$id)->first();
     }
 
     /**

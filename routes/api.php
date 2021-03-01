@@ -57,3 +57,5 @@ Route::middleware('api')->get('personal_discussions','App\Http\Controllers\Discu
 Route::middleware('api')->apiResource('category','App\Http\Controllers\CategoryController');
 Route::middleware('api')->delete('category','App\Http\Controllers\CategoryController@destroy');
 Route::middleware('api')->post('report','App\Http\Controllers\ReportController@store');
+Route::middleware('api')->get('users/{id}','App\Http\Controllers\UserController@show');
+
